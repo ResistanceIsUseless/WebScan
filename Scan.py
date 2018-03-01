@@ -1,3 +1,5 @@
+#/usr/bin/python
+#Webscanner
 import requests
 
 url = "http://10.11.1.50/robots.txt"
