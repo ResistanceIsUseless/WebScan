@@ -2,7 +2,7 @@
 #Webscanner
 import requests
 
-url = "http://10.11.1.50/robots.txt"
+url = "http://www.epa.gov/robots.txt"
 
 headers = {
     'Cache-Control': "no-cache",
@@ -10,5 +10,9 @@ headers = {
     }
 
 response = requests.request("GET", url, headers=headers)
+r = response.text
 
-print(response.text)
+for line in response.text.split("\n"):
+#This is doing the opposite, looking online i probably need another for loop
+    if line.find("Disallow:"):
+        print(line)
