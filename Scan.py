@@ -14,5 +14,7 @@ r = response.text
 
 for line in response.text.split("\n"):
 #This is doing the opposite, looking online i probably need another for loop
-    if line.find("Disallow:"):
+    if "Disallow" in line:
         print(line)
+    else:
+        print("ignore")
