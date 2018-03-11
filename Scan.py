@@ -8,17 +8,17 @@ import urllib.parse
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("host", help="URL you wish to scan")
-parser.add_argument("path", help="Scan using specific path")
-parser.add_argument("robots", help="Check for robots.txt and check for disallow's")
+parser.add_argument('-u', "--host", help="URL you wish to scan")
+parser.add_argument('-p', "--path", help="Scan using specific path")
+parser.add_argument('-r', "--robots", help="Check for robots.txt and check for disallow's")
 args = parser.parse_args()
-if args.robots:
+#if args.robots:
 #    print("Checking Robots")
 #if args.u:
 
-host = "http://www.epa.gov"
-path = "/robots.txt"
-url = urllib.parse.urljoin(host, path)
+whost = args.host
+path = args.path
+url = urllib.parse.urljoin(whost, path)
 
 headers = {
     'Cache-Control': "no-cache",
