@@ -6,14 +6,15 @@ import requests
 import argparse
 import urllib.parse
 
-
+#argument parsing and helptext
 parser = argparse.ArgumentParser()
 parser.add_argument('-u', "--host", help="URL you wish to scan")
 parser.add_argument('-p', "--path", help="Scan using specific path")
-parser.add_argument('-r', "--robots", help="Check for robots.txt and check for disallow's")
+parser.add_argument('-r', "--robots", help="Check for robots.txt and check for disallow's", default='robots.txt', action ='store_true')
 args = parser.parse_args()
-#if args.robots:
-#    print("Checking Robots")
+if args.robots:
+    print("Checking Robots")
+    args.path = 'robots.txt'
 #if args.u:
 
 whost = args.host
