@@ -15,7 +15,7 @@ args = parser.parse_args()
 if args.robots:
     print("Checking Robots")
     args.path = 'robots.txt'
-#if args.u:
+#if args.host:
 
 whost = args.host
 path = args.path
