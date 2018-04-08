@@ -1,12 +1,11 @@
-# /usr/bin/python
-# Webscanner - Pykto
-# TD: Make function for iterating through pages with parameters for all options
-# TD: Decide on default scanning type (dirbuster or nikto)
-# TD: Error handling(connection, missing pages,rtc),exporting data ,
-# hand off work to other scanners, api fuzzing,passive info gathering
+#/usr/bin/python
+#Webscanner - Pykto
+#TD: Make function for iterating through pages with parameters for all options
+#TD: Decide on default scanning type (dirbuster or nikto)
+#TD: Error handling(connection, missing pages,rtc),exporting data , hand off work to other scanners, api fuzzing,passive info gathering
 import requests, argparse, urllib.parse, os
 
-# argument parsing and helptext
+#argument parsing and helptext
 parser = argparse.ArgumentParser()
 parser.add_argument('-u', "--host", help="URL you wish to scan")
 parser.add_argument('-p', "--path", help="Scan using specific path")
