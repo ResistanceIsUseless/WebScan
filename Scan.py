@@ -1,8 +1,9 @@
-#/usr/bin/python
-#Webscanner - Pykto
-#TD: Make function for iterating through pages with parameters for all options
-#TD: Decide on default scanning type (dirbuster or nikto)
-#TD: Error handling(connection, missing pages,rtc),exporting data , hand off work to other scanners, api fuzzing,passive info gathering
+# /usr/bin/python
+# Webscanner - Pykto
+# TD: Make function for iterating through pages with parameters for all options
+# TD: Decide on default scanning type (dirbuster or nikto)
+# TD: Error handling(connection, missing pages,rtc),exporting data ,
+# hand off work to other scanners, api fuzzing,passive info gathering
 import requests, argparse, urllib.parse, os
 
 #argument parsing and helptext
@@ -14,8 +15,19 @@ args = parser.parse_args()
 rpaths = []
 rpaths_good = []
 found_files = []
+paths = []
+files = []
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+# sort paths and files
+for check in lines:
+    match = re.search(r"[a-zA-Z0-9-_.]+\..*", check)
+    if match:
+        files.append(match)
+    else:
+        paths.append(match)
+
 # check for robots.txt and store disallow paths if they are there
 if args.robots:
     print("Checking Robots")
