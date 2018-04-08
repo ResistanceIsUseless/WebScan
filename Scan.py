@@ -1,11 +1,12 @@
-#/usr/bin/python
-#Webscanner - Pykto
-#TD: Make function for iterating through pages with parameters for all options
-#TD: Decide on default scanning type (dirbuster or nikto)
-#TD: Error handling(connection, missing pages,rtc),exporting data , hand off work to other scanners, api fuzzing,passive info gathering
+# /usr/bin/python
+# Webscanner - Pykto
+# TD: Make function for iterating through pages with parameters for all options
+# TD: Decide on default scanning type (dirbuster or nikto)
+# TD: Error handling(connection, missing pages,rtc),exporting data ,
+# hand off work to other scanners, api fuzzing,passive info gathering
 import requests, argparse, urllib.parse, os
 
-#argument parsing and helptext
+# argument parsing and helptext
 parser = argparse.ArgumentParser()
 parser.add_argument('-u', "--host", help="URL you wish to scan")
 parser.add_argument('-p', "--path", help="Scan using specific path")
@@ -16,7 +17,7 @@ rpaths_good = []
 found_files = []
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
-#check for robots.txt and store disallow paths if they are there
+# check for robots.txt and store disallow paths if they are there
 if args.robots:
     print("Checking Robots")
     args.path = 'robots.txt'
@@ -35,7 +36,7 @@ if args.robots:
             rpaths.append(lines.partition('Disallow: ')[2])
 
     print(rpaths)
-#iterate through disallow lines checking status codes
+# iterate through disallow lines checking status codes
     for path in rpaths:
         url = urllib.parse.urljoin(webhost, path)
         response = requests.request("HEAD", url, headers=headers)
@@ -44,7 +45,7 @@ if args.robots:
             print("Success:" + str(url) +" STATUS: "+ str(response.status_code))
 
 
-#scan through top domain checking for vulnerable files
+# scan through top domain checking for vulnerable files
 if args.host:
     with open(os.path.join(__location__, "toplist-sorted.txt")) as file:
         file_db = [line.strip() for line in file]
@@ -64,7 +65,7 @@ if args.host:
 
     print(rpaths)
 
-#ssss
+
     for path in rpaths:
         url = urllib.parse.urljoin(webhost, path)
         headers = {
@@ -76,7 +77,7 @@ if args.host:
         if response.status_code == requests.codes.ok:
             print("Success:" + str(url) + " STATUS: " + str(response.status_code))
             rpaths_good.append(path)
-        #paths AND files from robots.txt are now saved to rpaths_good
+        # paths AND files from robots.txt are now saved to rpaths_good
 
         print(rpaths_good)
         for lines in rpaths_good:
@@ -86,7 +87,6 @@ if args.host:
             print(url)
             if response.status_code == requests.codes.ok:
                 print("Success:" + str(url) + " STATUS: " + str(response.status_code))
-
- #import file and try against found paths as well as root directory
-
+# import file and try against found paths as well as root directory
+# PULL FILE NAME FROM PATH ([a-zA-Z0-9-_.]+\..*)
 
