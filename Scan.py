@@ -4,7 +4,8 @@
 # TD: Decide on default scanning type (dirbuster or nikto)
 # TD: Error handling(connection, missing pages,rtc),exporting data ,
 # hand off work to other scanners, api fuzzing,passive info gathering
-import requests, argparse, urllib.parse, os
+# Async requests
+import requests, argparse, urllib.parse, os, re
 
 #argument parsing and helptext
 parser = argparse.ArgumentParser()
@@ -15,51 +16,56 @@ args = parser.parse_args()
 rpaths = []
 rpaths_good = []
 found_files = []
-paths = []
-files = []
+imported_paths = []
+imported_files = ['.bash_history', '.bashrc', '.DS_Store' ,'.DS_STORE', '.git/config', '.git/HEAD',
+                  '.gitignore', '.history', '.htaccess', 'htpasswd', '.htpasswd', '.passwd', '.profile', '.psql_history',
+                  '.rhosts','.settings', '.sh_history','.ssh/authorized_keys','.ssh/known_hosts', '.svn/entries']
+
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 # sort paths and files
-for check in lines:
+with open(os.path.join(__location__, "toplist-sorted.txt")) as file:
+    file_db = [line.strip() for line in file]
+for check in file_db:
     match = re.search(r"[a-zA-Z0-9-_.]+\..*", check)
     if match:
-        files.append(match)
+        imported_files.append(match)
     else:
-        paths.append(match)
+        imported_paths.append(match)
 
-# check for robots.txt and store disallow paths if they are there
-if args.robots:
-    print("Checking Robots")
-    args.path = 'robots.txt'
-    webhost = args.host
-    path = args.path
-    url = urllib.parse.urljoin(webhost, path)
+# Check for robots.txt and store disallow paths if they are there
+# if args.robots:
+#     print("Checking Robots")
+#     args.path = 'robots.txt'
+#     webhost = args.host
+#     path = args.path
+#     url = urllib.parse.urljoin(webhost, path)
+#
+#     headers = {
+#         'Cache-Control': "no-cache",
+#
+#     }
+#     print(url)
+#     response = requests.request("GET", url, headers=headers)
+#     for lines in response.text.split("\n"):
+#         if "Disallow:" in lines:
+#             rpaths.append(lines.partition('Disallow: ')[2])
+#
+#     print(rpaths)
+# # iterate through disallow lines checking status codes
+#
+#     for path in rpaths:
+#         url = urllib.parse.urljoin(webhost, path)
+#         response = requests.request("HEAD", url, headers=headers)
+#         #print(url)
+#         if response.status_code == requests.codes.ok:
+#             print("Success:" + str(url) +" STATUS: " + str(response.status_code))
+#
 
-    headers = {
-        'Cache-Control': "no-cache",
-        'Postman-Token': "00b85c94-437c-492d-bbaa-cfb0215421ad"
-    }
-    print(url)
-    response = requests.request("GET", url, headers=headers)
-    for lines in response.text.split("\n"):
-        if "Disallow:" in lines:
-            rpaths.append(lines.partition('Disallow: ')[2])
 
-    print(rpaths)
-# iterate through disallow lines checking status codes
-    for path in rpaths:
-        url = urllib.parse.urljoin(webhost, path)
-        response = requests.request("HEAD", url, headers=headers)
-        #print(url)
-        if response.status_code == requests.codes.ok:
-            print("Success:" + str(url) +" STATUS: "+ str(response.status_code))
-
-
-# scan through top domain checking for vulnerable files
 if args.host:
-    with open(os.path.join(__location__, "toplist-sorted.txt")) as file:
-        file_db = [line.strip() for line in file]
+    # Grab Robots.txt
     print("Base Scan \nChecking for files")
     args.path = "robots.txt"
     webhost = args.host
@@ -67,37 +73,44 @@ if args.host:
     url = urllib.parse.urljoin(webhost, path)
     headers = {
         'Cache-Control': "no-cache",
-         'Postman-Token': "00b85c94-437c-492d-bbaa-cfb0215421ad"
     }
     response = requests.request("GET", url, headers=headers)
+    # Split robots.txt into paths and files
     for lines in response.text.split("\n"):
         if "allow:" in lines:
-            rpaths.append(lines.partition('allow: ')[2])
+            rpaths.append(lines.partition('Disallow: ')[2])
+    for check in rpaths:
+        match = re.search(r"[a-zA-Z0-9-_.]+\..*", check)
+        if match:
+            imported_files.append(match)
+        else:
+            imported_paths.append(match)
+    print("printing robots.txt")
+    print(imported_paths + imported_files)
 
-    print(rpaths)
 
-
-    for path in rpaths:
+    for path in imported_files:
         url = urllib.parse.urljoin(webhost, path)
         headers = {
             'Cache-Control': "no-cache",
-            'Postman-Token': "00b85c94-437c-492d-bbaa-cfb0215421ad"
         }
         response = requests.request("HEAD", url, headers=headers)
-        # print(url)
+        print(url)
         if response.status_code == requests.codes.ok:
             print("Success:" + str(url) + " STATUS: " + str(response.status_code))
             rpaths_good.append(path)
-        # paths AND files from robots.txt are now saved to rpaths_good
 
-        print(rpaths_good)
-        for lines in rpaths_good:
-            path = rpaths_good + file_db
-            url = urllib.parse.urljoin(webhost, path)
-            response = requests.request("HEAD", url, headers=headers)
-            print(url)
-            if response.status_code == requests.codes.ok:
-                print("Success:" + str(url) + " STATUS: " + str(response.status_code))
-# import file and try against found paths as well as root directory
+
+        # paths AND files from robots.txt are now saved to rpaths_good
+        #
+        # for lines in rpaths_good:
+        #     path = rpaths_good + file_db
+        #     url = urllib.parse.urljoin(webhost, path)
+        #     response = requests.request("HEAD", url, headers=headers)
+        #     print(url)
+        #     if response.status_code == requests.codes.ok:
+        #         print("Success:" + str(url) + " STATUS: " + str(response.status_code))
+print(rpaths_good)
+# Import file and try against found paths as well as root directory
 # PULL FILE NAME FROM PATH ([a-zA-Z0-9-_.]+\..*)
 

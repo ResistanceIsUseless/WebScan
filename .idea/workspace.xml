@@ -16,16 +16,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Scan.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Scan.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Scan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="32" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+            <state relative-caret-position="557">
+              <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scratch.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scratch.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scratch.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
@@ -43,8 +43,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
-        <option value="$PROJECT_DIR$/Scan.py" />
         <option value="$PROJECT_DIR$/scratch.py" />
+        <option value="$PROJECT_DIR$/Scan.py" />
       </list>
     </option>
   </component>
@@ -55,10 +55,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1607" />
-    <option name="y" value="1466" />
-    <option name="width" value="1684" />
-    <option name="height" value="1262" />
+    <option name="x" value="983" />
+    <option name="y" value="382" />
+    <option name="width" value="1908" />
+    <option name="height" value="1350" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -121,7 +121,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch (1)">
+  <component name="RunManager" selected="Python.Webscanner">
     <configuration name="Webscanner" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="WebScanner" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -186,9 +186,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Webscanner" />
         <item itemvalue="Python.scratch (1)" />
         <item itemvalue="Python.scratch" />
-        <item itemvalue="Python.Webscanner" />
       </list>
     </recent_temporary>
   </component>
@@ -206,17 +206,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1607" y="1466" width="1684" height="1262" extended-state="0" />
+    <frame x="983" y="382" width="1908" height="1350" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50359714" side_tool="true" visible="true" weight="0.32955536" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50317127" side_tool="true" visible="true" weight="0.22105263" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32925338" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4964029" visible="true" weight="0.32955536" />
-      <window_info anchor="bottom" x="171" y="2744" width="1732" height="82" id="Terminal" order="7" type="FLOATING" visible="true" weight="0.35469314" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20743406" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49682876" visible="true" weight="0.22105263" />
+      <window_info active="true" anchor="bottom" x="5" y="2644" width="1527" height="181" id="Terminal" order="7" type="FLOATING" visible="true" weight="0.35469314" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18287526" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -241,10 +241,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Scan.py</url>
-          <line>37</line>
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py</url>
           <option name="timeStamp" value="1" />
@@ -317,17 +313,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Scan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="32" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="3" lean-forward="true" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="557">
+          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
         </state>
       </provider>
     </entry>
